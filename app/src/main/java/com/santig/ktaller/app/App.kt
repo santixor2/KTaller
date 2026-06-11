@@ -1,4 +1,4 @@
-package com.santig.ktaller
+package com.santig.ktaller.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

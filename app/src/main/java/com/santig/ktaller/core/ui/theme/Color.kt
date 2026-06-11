@@ -1,4 +1,4 @@
-package com.santig.ktaller.ui.theme
+package com.santig.ktaller.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,6 +1,5 @@
-package com.santig.ktaller.ui.theme
+package com.santig.ktaller.core.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

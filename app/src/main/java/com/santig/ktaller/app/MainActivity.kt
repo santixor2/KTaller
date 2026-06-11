@@ -1,10 +1,11 @@
-package com.santig.ktaller
+package com.santig.ktaller.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.santig.ktaller.ui.theme.KTallerTheme
+import com.santig.ktaller.core.ui.screen.AppScreen
+import com.santig.ktaller.core.ui.theme.KTallerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,7 +15,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             KTallerTheme {
-
+                AppScreen()
             }
         }
     }

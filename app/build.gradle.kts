@@ -1,15 +1,16 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    kotlin("plugin.serialization") version "2.0.0"
 }
 
 android {
     namespace = "com.santig.ktaller"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.santig.ktaller"
@@ -23,14 +24,16 @@ android {
 
     buildTypes {
         release {
-            optimization {
-                enable = false
-            }
+            isMinifyEnabled = false
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
@@ -53,4 +56,17 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    //Hilt
+    implementation(libs.hilt.android.v257)
+    ksp(libs.hilt.android.compiler.v257)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    //NAVIGATION
+    implementation(libs.androidx.navigation.compose)
+
+    //ROOM
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 }

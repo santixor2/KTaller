@@ -31,7 +31,7 @@ fun StatusCategory(
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 4.dp),
+            .padding(start = 4.dp, end = 4.dp),
         horizontalArrangement = Arrangement.spacedBy(6.dp)
     ) {
         items(categories) { status ->
@@ -54,6 +54,7 @@ fun StatusCategory(
         }
     }
 }
+
 @Composable
 fun CategoryChip(text: String, onClick: (String) -> Unit, selected: Boolean) {
     Box(
@@ -63,11 +64,12 @@ fun CategoryChip(text: String, onClick: (String) -> Unit, selected: Boolean) {
                 RoundedCornerShape(0)
             )
             .clickable { onClick(text) }
-            .padding(horizontal = 20.dp, vertical = 4.dp)
+            .padding(horizontal = 20.dp, vertical = 6.dp)
     ) {
-        Text(text = text, color = if (selected) Color.White else Color.White, fontSize = 14.5.sp)
+        Text(text = text, color = Color.White, fontSize = 14.5.sp)
     }
 }
+
 @Preview(showBackground = false)
 @Composable
 fun PreviewStatusCategory() {

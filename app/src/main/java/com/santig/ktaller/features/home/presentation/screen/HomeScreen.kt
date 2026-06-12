@@ -13,7 +13,8 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    HomeContent(
+       HomeContent(
+        uiState = uiState,
         selectedStatus = uiState.selectedStatus,
         onStatusSelected = { status ->
             viewModel.onEvent(event = HomeEvent.SelectStatus(status))

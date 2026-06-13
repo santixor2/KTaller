@@ -29,14 +29,13 @@ import com.santig.ktaller.features.home.presentation.viewmodel.state.HomeUiState
 fun HomeContent(
     selectedStatus: OrderStatus,
     onStatusSelected: (OrderStatus) -> Unit,
+    goToAdd: () -> Unit,
     uiState: HomeUiState
 ) {
     Scaffold(
         topBar = {
             TopBar(
-                goToAdd = {
-
-                },
+                goToAdd = goToAdd,
                 goToSetting = {
 
                 }

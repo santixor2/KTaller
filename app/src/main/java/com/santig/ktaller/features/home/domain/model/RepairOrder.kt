@@ -8,5 +8,7 @@ data class RepairOrder(
     val device: String = "",
     val price: String = "",
     val date: String = "",
+    val description: String = "",
+    val createdAt: Long  = 0,
     val status: OrderStatus = OrderStatus.ALL
 )

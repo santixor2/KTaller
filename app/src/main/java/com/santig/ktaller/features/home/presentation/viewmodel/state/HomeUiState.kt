@@ -8,5 +8,6 @@ data class HomeUiState(
     val orders: List<RepairOrder> = emptyList(),
     val allOrders: List<RepairOrder> = emptyList(),
     val loading: Boolean = false,
+    val homeLoading : Boolean = false,
     val showBottomSheet: Boolean = false
 )

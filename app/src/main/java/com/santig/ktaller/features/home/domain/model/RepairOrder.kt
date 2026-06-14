@@ -9,6 +9,6 @@ data class RepairOrder(
     val price: String = "",
     val date: String = "",
     val description: String = "",
-    val createdAt: Long  = 0,
+    val createdAt: String = "",
     val status: OrderStatus = OrderStatus.ALL
 )

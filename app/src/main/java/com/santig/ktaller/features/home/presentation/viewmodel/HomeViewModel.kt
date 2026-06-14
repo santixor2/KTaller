@@ -1,10 +1,10 @@
 package com.santig.ktaller.features.home.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.santig.ktaller.features.home.data.mapper.RepairOrderMapper
 import com.santig.ktaller.features.home.domain.model.Order
-import com.santig.ktaller.features.home.domain.model.RepairOrder
 import com.santig.ktaller.features.home.domain.repository.OrderRepository
 import com.santig.ktaller.features.home.presentation.viewmodel.enums.OrderStatus
 import com.santig.ktaller.features.home.presentation.viewmodel.event.HomeEvent
@@ -13,9 +13,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -82,6 +84,13 @@ class HomeViewModel @Inject constructor(
 
     private fun observeOrders() {
         repository.getAllOrders()
+            .onStart {
+                _uiState.update { it.copy(homeLoading = true) }
+            }
+            .catch { exception ->
+                Log.d("HOMEVIEWMODEL","Error obteniendo órdenes ==>> ${exception.printStackTrace()}")
+                _uiState.update { it.copy(homeLoading = false) }
+            }
             .onEach { orders ->
                 val repairOrders = RepairOrderMapper.mapToUiList(orders)
                 val filteredOrders = when (_uiState.value.selectedStatus) {
@@ -93,7 +102,8 @@ class HomeViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(
                         allOrders = repairOrders,
-                        orders = filteredOrders
+                        orders = filteredOrders,
+                        homeLoading = false
                     )
                 }
             }

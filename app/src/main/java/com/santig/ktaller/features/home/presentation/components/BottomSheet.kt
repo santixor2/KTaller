@@ -26,7 +26,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.santig.ktaller.core.ui.screen.PrimaryPurple
 import com.santig.ktaller.features.home.domain.model.Order
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -100,8 +99,9 @@ fun BottomSheet(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(55.dp)
-                        .padding(horizontal = 16.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = PrimaryPurple),
+                        .padding(horizontal = 16.dp)
+                        .background(color = Color(0xFF6B5DE8), shape = RoundedCornerShape(20.dp)),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
                     shape = RoundedCornerShape(20.dp),
                     enabled = isButtonEnabled
                 ) {

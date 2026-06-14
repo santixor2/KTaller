@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.santig.ktaller.core.ui.components.TopBar
 import com.santig.ktaller.features.home.presentation.components.SearchBar
 import com.santig.ktaller.features.home.presentation.components.StatusCardItem
+import com.santig.ktaller.features.home.presentation.components.StatusCardSkeleton
 import com.santig.ktaller.features.home.presentation.components.StatusCategory
 import com.santig.ktaller.features.home.presentation.viewmodel.enums.OrderStatus
 import com.santig.ktaller.features.home.presentation.viewmodel.state.HomeUiState
@@ -68,11 +69,17 @@ fun HomeContent(
                 contentPadding = PaddingValues(vertical = 12.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(
-                    items = uiState.orders,
-                    key = { order -> order.id }
-                ) { order ->
-                    StatusCardItem(order = order)
+                if (uiState.homeLoading) {
+                    items(7) {
+                        StatusCardSkeleton()
+                    }
+                } else {
+                    items(
+                        items = uiState.orders,
+                        key = { order -> order.id }
+                    ) { order ->
+                        StatusCardItem(order = order)
+                    }
                 }
             }
         }

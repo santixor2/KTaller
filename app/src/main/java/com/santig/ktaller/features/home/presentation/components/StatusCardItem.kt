@@ -91,7 +91,7 @@ fun StatusCardItem(
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
-                        text = order.date,
+                        text = order.createdAt,
                         color = Color(0xFF7F8489),
                         fontWeight = FontWeight.W400,
                         fontSize = 13.sp,

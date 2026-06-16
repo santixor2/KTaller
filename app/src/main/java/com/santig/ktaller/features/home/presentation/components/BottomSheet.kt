@@ -94,6 +94,7 @@ fun BottomSheet(
                     onTextChange = { onOrderChange(order.copy(description = it)) }
                 )
                 Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.height(10.dp))
                 Button(
                     onClick = insertOrder,
                     modifier = Modifier

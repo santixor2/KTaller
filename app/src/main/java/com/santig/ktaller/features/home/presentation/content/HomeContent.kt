@@ -36,15 +36,14 @@ fun HomeContent(
     selectedStatus: OrderStatus,
     onStatusSelected: (OrderStatus) -> Unit,
     goToAdd: () -> Unit,
+    goToSetting : () -> Unit,
     uiState: HomeUiState
 ) {
     Scaffold(
         topBar = {
             TopBar(
                 goToAdd = goToAdd,
-                goToSetting = {
-
-                }
+                goToSetting = goToSetting
             )
         },
         modifier = Modifier

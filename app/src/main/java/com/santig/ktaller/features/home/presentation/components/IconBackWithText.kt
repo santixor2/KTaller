@@ -47,9 +47,9 @@ fun IconBackWithText(
             modifier = Modifier
                 .align(Alignment.Center),
             color = Color.White,
-            style = MaterialTheme.typography.titleMedium,
-            fontSize = 16.5.sp,
-            fontWeight = FontWeight.W400
+            style = MaterialTheme.typography.bodyLarge,
+            fontSize = 17.sp,
+            fontWeight = FontWeight.W500
         )
     }
 }

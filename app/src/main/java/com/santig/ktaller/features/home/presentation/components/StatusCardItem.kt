@@ -1,6 +1,7 @@
 package com.santig.ktaller.features.home.presentation.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,13 +29,15 @@ import com.santig.ktaller.features.home.domain.model.RepairOrder
 
 @Composable
 fun StatusCardItem(
-    order: RepairOrder
+    order: RepairOrder,
+    onItemClick: (Int) -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(70.dp)
-            .padding(horizontal = 12.dp),
+            .padding(horizontal = 12.dp)
+            .clickable(onClick = { onItemClick(order.id) }),
         shape = RoundedCornerShape(0.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFF1E1F22)
@@ -106,5 +109,5 @@ fun StatusCardItem(
 @Preview(showBackground = true)
 @Composable
 fun PreviewStatusCardItem() {
-    StatusCardItem(order = RepairOrder())
+    StatusCardItem(order = RepairOrder(), onItemClick = {})
 }

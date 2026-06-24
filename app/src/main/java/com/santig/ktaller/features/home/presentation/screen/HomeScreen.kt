@@ -28,7 +28,8 @@ fun HomeScreen(
         goToAdd = {
             viewModel.onEvent(event = HomeEvent.ShowBottomSheet(show = true))
         },
-        goToSetting = { navController.navigate(HomeNav.ConfigurationScreen.route) }
+        goToSetting = { navController.navigate(HomeNav.ConfigurationScreen.route) },
+        onItemClick = { navController.navigate(HomeNav.OrderDetailScreen.createRoute(id = it)) }
     )
     if (uiState.showBottomSheet) {
         BottomSheet(

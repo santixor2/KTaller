@@ -21,4 +21,9 @@ class OrderRepositoryImpl @Inject constructor(
             entities.map(OrderDataMapper::mapToDomain)
         }
     }
+
+    override suspend fun getOrderById(id: Int): Order {
+        val entity = dao.getOrderById(id)
+        return OrderDataMapper.mapToDomain(entity)
+    }
 }

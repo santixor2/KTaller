@@ -37,6 +37,7 @@ fun HomeContent(
     onStatusSelected: (OrderStatus) -> Unit,
     goToAdd: () -> Unit,
     goToSetting : () -> Unit,
+    onItemClick: (Int) -> Unit,
     uiState: HomeUiState
 ) {
     Scaffold(
@@ -85,7 +86,7 @@ fun HomeContent(
                             Text(
                                 text = "No hay órdenes para mostrar",
                                 color = Color.White,
-                                fontSize = 24.sp,
+                                fontSize = 20.sp,
                                 fontWeight = FontWeight.W500,
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier.fillMaxWidth()
@@ -97,7 +98,10 @@ fun HomeContent(
                         items = uiState.orders,
                         key = { order -> order.id }
                     ) { order ->
-                        StatusCardItem(order = order)
+                        StatusCardItem(
+                            order = order,
+                            onItemClick = { onItemClick(it) }
+                        )
                     }
                 }
             }

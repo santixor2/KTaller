@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 enum class OrderStatus(val displayName: String, val color: Color) {
     BOOKMARK("FAVORITOS", Color(0xFF3F51B5)),
     ALL(displayName = "TODOS", Color(0xFF8BC34A)),
-    RECEIVED(displayName = "RECIBIDOS", Color(0xFF2196F3)),
+    RECEIVED(displayName = "RECIBIDO", Color(0xFF2196F3)),
     DIAGNOSIS(displayName = "DIAGNOSTICO", Color(0xFF009688)),
     REPAIRING(displayName = "REPARANDO", Color(0xFFFFC107)),
     WAITING_PARTS(displayName = "ESPERANDO REPUESTO", Color(0xFF673AB7)),

@@ -25,8 +25,10 @@ fun OrderDetailScreen(
     }
     OrderDetailContent(
         order = uiState.order,
+        uiState = uiState,
+        onEvent = { event -> viewModel.onEvent(event = event) },
         onBack = {
-            if (!isBackClicked){
+            if (!isBackClicked) {
                 isBackClicked = true
                 navController.popBackStack()
             }

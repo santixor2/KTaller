@@ -26,4 +26,8 @@ class OrderRepositoryImpl @Inject constructor(
         val entity = dao.getOrderById(id)
         return OrderDataMapper.mapToDomain(entity)
     }
+
+    override suspend fun updateOrderStatus(id: Int, status: String) {
+        dao.updateOrderStatusById(orderId = id, newStatus = status)
+    }
 }

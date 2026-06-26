@@ -16,4 +16,7 @@ interface OrderDao {
 
     @Query("SELECT * FROM `Order` WHERE id = :id")
     suspend fun getOrderById(id: Int): OrderEntity
+
+    @Query("UPDATE `Order` SET status = :newStatus WHERE id = :orderId")
+    suspend fun updateOrderStatusById(orderId: Int, newStatus: String)
 }

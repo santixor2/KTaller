@@ -6,5 +6,6 @@ data class Order(
     val price: String = "",
     val description: String = "",
     val createdAt: Long = 0,
-    val status: String = ""
+    val status: String = "",
+    val save : Boolean = false
 )

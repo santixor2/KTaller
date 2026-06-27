@@ -19,5 +19,7 @@ data class OrderEntity(
     @ColumnInfo(name = "description")
     val description: String,
     @ColumnInfo(name = "created_at")
-    val createdAt: Long
+    val createdAt: Long,
+    @ColumnInfo(name = "save")
+    val save: Boolean
 )

@@ -3,6 +3,7 @@ package com.santig.ktaller.features.home.presentation.content
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,21 +14,25 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.santig.ktaller.R
 import com.santig.ktaller.features.home.domain.model.RepairOrder
 import com.santig.ktaller.features.home.presentation.components.IconBackWithText
 import com.santig.ktaller.features.home.presentation.components.StepsProgress
@@ -39,7 +44,8 @@ fun OrderDetailContent(
     onBack: () -> Unit,
     order: RepairOrder,
     uiState: OrderDetailUiState,
-    onEvent: (OrderDetailEvent) -> Unit
+    onEvent: (OrderDetailEvent) -> Unit,
+    onClickBookmark: (Boolean) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -104,17 +110,34 @@ fun OrderDetailContent(
         }
         StepsProgress(order = order)
         Spacer(modifier = Modifier.height(30.dp))
-        Text(
-            text = "Cliente",
-            color = Color.White,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.W500,
-            textAlign = TextAlign.Start,
-            maxLines = 1,
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 15.dp)
-        )
+                .padding(horizontal = 15.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Cliente",
+                color = Color.White,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.W500,
+                textAlign = TextAlign.Start,
+                maxLines = 1,
+                modifier = Modifier.weight(1f)
+            )
+            Icon(
+                painter = painterResource(
+                    if (order.save) {
+                        R.drawable.ic_bookmark_fill
+                    } else R.drawable.ic_bookmark
+                ),
+                contentDescription = "",
+                tint = Color.White,
+                modifier = Modifier
+                    .size(32.dp)
+                    .clickable(onClick = { onClickBookmark(!order.save) })
+            )
+        }
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = "Nombre : ${order.clientName}",

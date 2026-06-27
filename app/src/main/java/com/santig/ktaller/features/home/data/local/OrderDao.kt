@@ -19,4 +19,7 @@ interface OrderDao {
 
     @Query("UPDATE `Order` SET status = :newStatus WHERE id = :orderId")
     suspend fun updateOrderStatusById(orderId: Int, newStatus: String)
+
+    @Query("UPDATE `Order` SET save = :newSave WHERE id = :orderId")
+    suspend fun updateOrderSave(orderId: Int, newSave: Boolean)
 }

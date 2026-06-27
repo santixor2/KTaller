@@ -58,10 +58,16 @@ class HomeViewModel @Inject constructor(
 
     private fun selectStatus(status: OrderStatus) {
         _uiState.update { current ->
-            val filteredList = if (status == OrderStatus.ALL) {
-                current.allOrders
-            } else {
-                current.allOrders.filter { it.status == status }
+            val filteredList = when (status) {
+                OrderStatus.ALL -> {
+                    current.allOrders
+                }
+                OrderStatus.BOOKMARK -> {
+                    current.allOrders.filter { it.save }
+                }
+                else -> {
+                    current.allOrders.filter { it.status == status }
+                }
             }
             current.copy(selectedStatus = status, orders = filteredList)
         }

@@ -32,6 +32,9 @@ class OrderDetailViewModel @Inject constructor(
             is OrderDetailEvent.OnAdvanceStatus -> {
                 updateOrder(event.order)
             }
+            is OrderDetailEvent.OnSaveOrder -> {
+                saveOrder(save = event.save)
+            }
         }
     }
 
@@ -63,6 +66,16 @@ class OrderDetailViewModel @Inject constructor(
                 _uiState.update { it.copy(loadingUpdate = false) }
             }.onFailure {
                 _uiState.update { it.copy(loadingUpdate = false) }
+            }
+        }
+    }
+
+    private fun saveOrder(save : Boolean){
+        viewModelScope.launch {
+            runCatching {
+                repository.updateOrderSave(id = args.id, save = save)
+            }.onSuccess {
+                getOrder()
             }
         }
     }

@@ -13,7 +13,8 @@ object OrderDataMapper {
             price = order.price.toDouble(),
             status = OrderStatus.RECEIVED.displayName,
             description = order.description,
-            createdAt = System.currentTimeMillis()
+            createdAt = System.currentTimeMillis(),
+            save = order.save
         )
     }
 
@@ -25,7 +26,8 @@ object OrderDataMapper {
             status = entity.status,
             createdAt = entity.createdAt,
             price = entity.price.toString(),
-            description = entity.description
+            description = entity.description,
+            save = entity.save
         )
     }
 }

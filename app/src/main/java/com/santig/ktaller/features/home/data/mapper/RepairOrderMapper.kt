@@ -16,7 +16,8 @@ object RepairOrderMapper {
             createdAt = order.createdAt.toFormattedDate(),
             status = OrderStatus.entries.firstOrNull {
                 it.displayName == order.status
-            } ?: OrderStatus.ALL
+            } ?: OrderStatus.ALL,
+            save = order.save
         )
     }
 

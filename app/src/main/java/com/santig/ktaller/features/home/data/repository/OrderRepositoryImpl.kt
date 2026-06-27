@@ -30,4 +30,8 @@ class OrderRepositoryImpl @Inject constructor(
     override suspend fun updateOrderStatus(id: Int, status: String) {
         dao.updateOrderStatusById(orderId = id, newStatus = status)
     }
+
+    override suspend fun updateOrderSave(id: Int, save: Boolean) {
+        dao.updateOrderSave(orderId = id, newSave = save)
+    }
 }

@@ -8,4 +8,5 @@ interface OrderRepository {
     fun getAllOrders(): Flow<List<Order>>
     suspend fun getOrderById(id: Int): Order
     suspend fun updateOrderStatus(id: Int, status: String)
+    suspend fun updateOrderSave(id : Int, save : Boolean)
 }

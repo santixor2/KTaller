@@ -4,4 +4,5 @@ import com.santig.ktaller.features.home.domain.model.RepairOrder
 
 sealed interface OrderDetailEvent {
     data class OnAdvanceStatus(val order: RepairOrder) : OrderDetailEvent
+    data class OnSaveOrder(val save : Boolean) : OrderDetailEvent
 }

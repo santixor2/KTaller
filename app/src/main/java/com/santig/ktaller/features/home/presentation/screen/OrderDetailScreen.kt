@@ -12,6 +12,7 @@ import androidx.navigation.NavHostController
 import com.santig.ktaller.core.ui.components.LoadingScreen
 import com.santig.ktaller.features.home.presentation.content.OrderDetailContent
 import com.santig.ktaller.features.home.presentation.viewmodel.OrderDetailViewModel
+import com.santig.ktaller.features.home.presentation.viewmodel.event.OrderDetailEvent
 
 @Composable
 fun OrderDetailScreen(
@@ -27,6 +28,7 @@ fun OrderDetailScreen(
         order = uiState.order,
         uiState = uiState,
         onEvent = { event -> viewModel.onEvent(event = event) },
+        onClickBookmark = { viewModel.onEvent(event = OrderDetailEvent.OnSaveOrder(it)) },
         onBack = {
             if (!isBackClicked) {
                 isBackClicked = true

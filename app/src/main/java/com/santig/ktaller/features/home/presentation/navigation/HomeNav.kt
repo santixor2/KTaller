@@ -8,6 +8,7 @@ sealed class HomeNav(val route: String) {
     ){
         fun createRoute(id: Int) = "order_detail/$id"
     }
+    data object PrinterScreen : HomeNav(route = "printer")
 }
 
 object HomeConstants {

@@ -8,6 +8,7 @@ import androidx.navigation.navArgument
 import com.santig.ktaller.features.home.presentation.screen.ConfigurationScreen
 import com.santig.ktaller.features.home.presentation.screen.HomeScreen
 import com.santig.ktaller.features.home.presentation.screen.OrderDetailScreen
+import com.santig.ktaller.features.home.presentation.screen.PrinterScreen
 
 fun NavGraphBuilder.homeGraph(
     navController: NavHostController
@@ -23,5 +24,8 @@ fun NavGraphBuilder.homeGraph(
         arguments = listOf(navArgument(HomeConstants.ID_DETAIL) { type = NavType.IntType })
     ) {
         OrderDetailScreen(navController = navController)
+    }
+    composable(route = HomeNav.PrinterScreen.route){
+        PrinterScreen(navController = navController)
     }
 }

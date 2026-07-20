@@ -24,7 +24,8 @@ import com.santig.ktaller.features.home.presentation.components.SettingsOption
 
 @Composable
 fun ConfigurationContent(
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onNavigate: (SettingsOption) -> Unit
 ) {
     val configItems = listOf(
         SettingsOption.Printer,
@@ -47,7 +48,7 @@ fun ConfigurationContent(
             SettingsItem(
                 icon = items.icon,
                 text = items.title,
-                onClick = {}
+                onClick = { onNavigate(items) }
             )
         }
         Spacer(modifier = Modifier.weight(1f))

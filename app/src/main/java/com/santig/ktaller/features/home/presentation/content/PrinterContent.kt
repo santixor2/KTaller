@@ -31,7 +31,8 @@ import com.santig.ktaller.features.home.presentation.components.TypePrinter
 
 @Composable
 fun PrinterContent(
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -96,7 +97,7 @@ fun PrinterContent(
         TypePrinter(
             icon = R.drawable.ic_bluetooth,
             text = "Bluetooth",
-            onClick = {}
+            onClick = onClick
         )
     }
 }
@@ -104,5 +105,5 @@ fun PrinterContent(
 @Preview(showBackground = true)
 @Composable
 fun PreviewPrinterContent() {
-    PrinterContent(onBack = {})
+    PrinterContent(onBack = {}, onClick = {})
 }

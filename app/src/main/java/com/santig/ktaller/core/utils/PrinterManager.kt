@@ -13,25 +13,42 @@ import androidx.core.content.edit
 object PrinterManager {
     private const val PREF_NAME = "printer_prefs"
     private const val KEY_MAC_ADDRESS = "saved_printer_mac"
+    private const val KEY_PRINTER_NAME = "saved_printer_name"
     private val SPP_UUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
 
-    fun savePrinter(context: Context, macAddress: String) {
-        val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        prefs.edit { putString(KEY_MAC_ADDRESS, macAddress) }
+    fun savePrinter(context: Context, name: String, macAddress: String): Boolean {
+        return try {
+            val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            prefs.edit {
+                putString(KEY_PRINTER_NAME, name)
+                putString(KEY_MAC_ADDRESS, macAddress)
+            }
+            true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
     }
-    fun getSavedPrinterMac(context: Context): String? {
+    fun getSavedPrinter(context: Context): BluetoothDevice? {
         val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        return prefs.getString(KEY_MAC_ADDRESS, null)
-    }
-    fun clearPrinter(context: Context) {
-        val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        prefs.edit().remove(KEY_MAC_ADDRESS).apply()
+        val name = prefs.getString(KEY_PRINTER_NAME, null)
+        val address = prefs.getString(KEY_MAC_ADDRESS, null)
+
+        return if (name != null && address != null) {
+            BluetoothDevice(name = name, address = address)
+        } else {
+            null
+        }
     }
     fun hasBluetoothConnectPermission(context: Context): Boolean {
         return ContextCompat.checkSelfPermission(
             context,
             Manifest.permission.BLUETOOTH_CONNECT
         ) == PackageManager.PERMISSION_GRANTED
+    }
+    fun isBluetoothEnabled(context: Context): Boolean {
+        val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager?
+        return bluetoothManager?.adapter?.isEnabled == true
     }
     @SuppressLint("MissingPermission")
     fun getPairedPrinters(context: Context): List<BluetoothDevice> {
@@ -54,6 +71,6 @@ object PrinterManager {
 }
 
 data class BluetoothDevice(
-    val name: String,
-    val address: String
+    val name: String = "",
+    val address: String = ""
 )

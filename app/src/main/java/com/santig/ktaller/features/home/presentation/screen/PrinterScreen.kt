@@ -1,8 +1,6 @@
 package com.santig.ktaller.features.home.presentation.screen
 
 import android.Manifest
-import android.bluetooth.BluetoothManager
-import android.content.Context
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
@@ -42,14 +40,16 @@ fun PrinterScreen(
         }
     }
     LaunchedEffect(Unit) {
-        val bluetoothManager =
-            context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-        val isEnabled = bluetoothManager.adapter?.isEnabled == true
-        if (!isEnabled) {
+        if (!PrinterManager.isBluetoothEnabled(context)) {
             showModal = true
+        }
+        PrinterManager.getSavedPrinter(context)?.let {
+            viewModel.onEvent(event = PrinterEvent.StartDevice(it))
         }
     }
     PrinterContent(
+        uiState = uiState,
+        show = uiState.startDevices != null,
         onBack = {
             if (!isBackClicked) {
                 isBackClicked = true
@@ -58,14 +58,19 @@ fun PrinterScreen(
         },
         onClick = {
             if (PrinterManager.hasBluetoothConnectPermission(context)) {
-                viewModel.onEvent(
-                    event = PrinterEvent.LoadDevices(PrinterManager.getPairedPrinters(context))
-                )
-                showSheet = true
+                if (PrinterManager.isBluetoothEnabled(context)) {
+                    viewModel.onEvent(
+                        event = PrinterEvent.LoadDevices(PrinterManager.getPairedPrinters(context))
+                    )
+                    showSheet = true
+                } else {
+                    showModal = true
+                }
             } else {
                 permissionLauncher.launch(Manifest.permission.BLUETOOTH_CONNECT)
             }
-        }
+        },
+        onClickPrinter = {}
     )
 
     if (showModal) {
@@ -82,6 +87,19 @@ fun PrinterScreen(
             onEvent = { viewModel.onEvent(event = it) },
             onDismiss = {
                 showSheet = false
+            },
+            onClick = {
+                val isSaved = PrinterManager.savePrinter(
+                    context = context,
+                    name = uiState.devices[0].name,
+                    macAddress = uiState.devices[0].address
+                )
+                if (isSaved) {
+                    showSheet = false
+                    PrinterManager.getSavedPrinter(context)?.let {
+                        viewModel.onEvent(event = PrinterEvent.StartDevice(it))
+                    }
+                }
             }
         )
     }

@@ -22,6 +22,14 @@ class PrinterViewModel @Inject constructor() : ViewModel() {
             is PrinterEvent.LoadDevices -> {
                 _uiState.update { it.copy(devices = event.devices) }
             }
+            is PrinterEvent.StartDevice -> {
+                _uiState.update {
+                    it.copy(
+                        startDevices = event.devices,
+                        hasSavedPrinter = !event.devices.name.isNotBlank()
+                    )
+                }
+            }
         }
     }
 

@@ -31,6 +31,7 @@ import com.santig.ktaller.features.home.presentation.viewmodel.state.PrinterUiSt
 @Composable
 fun DeviceListSheet(
     onDismiss: () -> Unit,
+    onClick: () -> Unit,
     uiState: PrinterUiState,
     onEvent: (PrinterEvent) -> Unit
 ) {
@@ -77,7 +78,7 @@ fun DeviceListSheet(
                 Spacer(modifier = Modifier.weight(1f))
                 if (uiState.selectedDeviceAddress.isNotBlank()){
                     Button(
-                        onClick = {},
+                        onClick = onClick,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp)

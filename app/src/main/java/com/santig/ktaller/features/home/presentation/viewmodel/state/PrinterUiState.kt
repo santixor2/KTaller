@@ -4,5 +4,7 @@ import com.santig.ktaller.core.utils.BluetoothDevice
 
 data class PrinterUiState(
     val devices: List<BluetoothDevice> = emptyList(),
-    val selectedDeviceAddress: String = ""
+    val startDevices: BluetoothDevice? = null,
+    val selectedDeviceAddress: String = "",
+    val hasSavedPrinter: Boolean = false
 )

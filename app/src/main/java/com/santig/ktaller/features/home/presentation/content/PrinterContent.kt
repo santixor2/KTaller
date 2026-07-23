@@ -28,11 +28,15 @@ import androidx.compose.ui.unit.sp
 import com.santig.ktaller.R
 import com.santig.ktaller.features.home.presentation.components.IconBackWithText
 import com.santig.ktaller.features.home.presentation.components.TypePrinter
+import com.santig.ktaller.features.home.presentation.viewmodel.state.PrinterUiState
 
 @Composable
 fun PrinterContent(
     onBack: () -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onClickPrinter: () -> Unit,
+    show: Boolean,
+    uiState: PrinterUiState
 ) {
     Column(
         modifier = Modifier
@@ -99,11 +103,38 @@ fun PrinterContent(
             text = "Bluetooth",
             onClick = onClick
         )
+        if (show) {
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = "Mi impresora",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.W400,
+                color = Color.White,
+                textAlign = TextAlign.Start,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+            )
+            Spacer(modifier = Modifier.height(15.dp))
+            if (uiState.startDevices != null){
+                TypePrinter(
+                    icon = R.drawable.ic_printer,
+                    text = uiState.startDevices.name,
+                    onClick = onClickPrinter
+                )
+            }
+        }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewPrinterContent() {
-    PrinterContent(onBack = {}, onClick = {})
+private fun PreviewPrinterContent() {
+    PrinterContent(
+        onBack = {},
+        onClick = {},
+        onClickPrinter = {},
+        show = true,
+        uiState = PrinterUiState()
+    )
 }

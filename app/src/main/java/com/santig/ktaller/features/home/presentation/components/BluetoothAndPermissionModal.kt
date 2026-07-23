@@ -60,7 +60,7 @@ fun BluetoothAndPermissionModal(
                 )
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
-                    text = "Asegúrate de que tu impresora esté \nencendida y en modo vinculación para \ndetectarla",
+                    text = "Para utilizar esta funcionalidad, es indispensable contar con el Bluetooth \nhabilitado y conceder los permisos de \nacceso correspondientes. Al presionar \nel botón de Bluetooth, se solicitará la \nautorización de los permisos del sistema requeridos para continuar.",
                     fontSize = 13.sp,
                     fontWeight = FontWeight.W500,
                     color = Color.White.copy(0.6f),
